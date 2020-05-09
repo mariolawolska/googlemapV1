@@ -1,0 +1,16 @@
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
+}
+ 
+.login,
+.image {
+  min-height: 100vh;
+}
+ 
+.bg-image {
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/form-bk.jpg');
+  background-size: cover;
+  background-position: center;
+}
+ 
