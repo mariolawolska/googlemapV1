@@ -2,10 +2,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row no-gutter py-5">
-        <div class=" d-md-flex col-md-4 col-lg-6 bg-image_" style="position:relative" > 
-            <div id="ajaxModel" style="max-height:1000px; width: 100%"aria-hidden="true"> 
-                <div class="modal-header" style=" background-color: #6c7ae0; color:white">
-                    <p>{{ $map->addressLine1 }}, {{ $map->addressLine2 }} {{ $map->addressLine3 }}</p>
+        <div class=" d-md-flex col-md-4 col-lg-6"> 
+            <div id="ajaxModel"  class="w-100" aria-hidden="true"> 
+                <div class="modal-header btn-v">
+                    <p>{{ $map->addressLine1 }} {{ $map->addressLine2 }} {{ $map->addressLine3 }}</p>
                     <p><strong>{{ $map->postCode }}</strong></p>
                 </div>
                 <div id="map"></div>
@@ -16,8 +16,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4 text-right">Edit answer</h3>
-                            <div class="border-top my-3 mb-5"></div>
+                            <h3 class="login-heading mb-4 text-right">Edit address details</h3>
+                            <div class="border-p my-3 mb-5"></div>
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -98,13 +98,11 @@
                                         </div>
                                         <div class="pull-right">
                                             <button type="submit" class="btn btn-v">Submit</button>
-
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-                    </div>
-
                     </form>
                 </div>
             </div>

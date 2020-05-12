@@ -8,7 +8,7 @@ window.onload = $(function () {
         data: {
         },
         beforeSend: function () {
-            //                    $('#loaderBox').modal('show');
+//                    $('#loaderBox').modal('show');
         },
         success: function (data) {
             var beaches = JSON.parse(data);

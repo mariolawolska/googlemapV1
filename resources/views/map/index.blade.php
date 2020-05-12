@@ -31,8 +31,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-lg-12 text-right pull-right"> <a class="btn btn-v " href="{{ route('map.create') }}">Create Map</a></div>
-                                
+                                <div class="col-lg-12 text-right pull-right"> <a class="btn btn-v " href="{{ route('map.create') }}">Add Location</a></div>
+
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,6 @@
                                     <table>
                                         <thead>
                                             <tr class="row100 head">
-                                                <th class="cell100 column1">Id</th>
                                                 <th class="cell100 column2">Address</th>
 
                                                 <th class="cell100 column3">City</th>
@@ -73,9 +72,6 @@
                                             @foreach ($mapCollection as $map)
 
                                             <tr class="row100 body">
-
-
-                                                <td class="cell100 column1">{{ $map->id }}</td>
                                                 <td class="cell100 column2">
                                                     <span>{{ $map->addressLine1 }}</span>
                                                     <span>{{ $map->addressLine2 }}</span>
@@ -97,18 +93,18 @@
 
                                                 <td class="cell100 column10">{{ $map->created_at }}</td>
                                                 <td class="cell100 column11">
-                                                    <form style="padding-right:30px;"action="{{ route('map.destroy',$map->id) }}" method="POST">
+                                                    <form class="pr-3" action="{{ route('map.destroy',$map->id) }}" method="POST">
 
-                                                        <a style="background:#64e6f6; color:white; margin:3px;padding:3px" class="btn  btn-action" href="{{ route('map.show', $map->id) }}">Show Map</a>
+                                                        <a class="btn  btn-action btn-show" href="{{ route('map.show', $map->id) }}">Show Map</a>
 
-                                                        <a style="background:#48cbfd ; color:white; margin:3px; padding:3px" class="btn  btn-action m-8" href="{{ route('map.edit', $map->id) }}">Edit Address</a>
+                                                        <a class="btn  btn-action m-8 btn-edit" href="{{ route('map.edit', $map->id) }}">Edit Address</a>
 
-                                                        <a style="background:#a4b5d3 ; color:white ; margin:3px;padding:3px" class="btn  btn-action m-8" href="{{ route('map.lookup', ['mapId'=>$map->id]) }}">Address Lookup</a>
+                                                        <a class="btn  btn-action m-8 btn-lookup" href="{{ route('map.lookup', ['mapId'=>$map->id]) }}">Address Lookup</a>
 
 
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button style ="background:#88bdfe ; color:white; margin:3px; padding:3px" type="submit" onclick="return confirm('Are you sure?')" class="btn btn-action m-8">Delete</button>
+                                                        <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-action m-8 btn-delete">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -118,7 +114,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="align-items-center" style="padding:50px 15px 15px 15px; margin:0 auto; text-align:center;">{!! $mapCollection->links() !!} </div>
+                                <div class="align-items-center pag-loc">{!! $mapCollection->links() !!} </div>
 
                             </div>
 
@@ -130,11 +126,6 @@
     </div>
 </div>
 
-<script src="{{ URL::asset('../resources/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ URL::asset('../resources/vendor/bootstrap/js/popper.js') }}"></script>
-<script src="{{ URL::asset('../resources/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ URL::asset('../resources/vendor/select2/select2.min.js') }}"></script>
-<script src="{{ URL::asset('../resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script>
     $('.js-pscroll').each(function () {
         var ps = new PerfectScrollbar(this);

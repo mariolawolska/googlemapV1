@@ -13,7 +13,9 @@ class VerifyCsrfToken extends Middleware {
      */
     protected $except = [
         'https://googlemapv1.wolscy.com/resources/js/map.js?mapId=*',
+        'https://www.googlemapv1.wolscy.com/resources/js/map.js?mapId=*',
         'https://googlemapv1.wolscy.com/public/getNearBy',
+        'https://www.googlemapv1.wolscy.com/public/getNearBy',
     ];
 
 }

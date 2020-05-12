@@ -85,7 +85,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Lat:</strong>
-                                        {{ $map->Lat }}
+                                        {{ $map->lat }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -120,8 +120,5 @@
     </div>
 </div>
 
-
-<!--<script src='js/map.js?mapId={{ $map->id }}'></script>-->
-<!--<script id="helper" src='{{ URL::asset('../resources/js/map.js') }} data-mapId={{ $map->id }} data-token={{ csrf_token() }} '></script>-->
-<script src='{{ URL::asset('../resources/js/map.js') }}?mapId={{ $map->id }}'></script>
+<script src='{{ URL::asset('../public/js/map.js') }}?mapId={{ $map->id }}'></script>
 @endsection

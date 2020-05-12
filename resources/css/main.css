@@ -322,3 +322,17 @@ tr:hover{border-top : 1px solid gray; border-bottom : 1px solid gray}
     background-position: center 
 }
 .form-group{font-size: 12px;}
+
+.pag-loc{
+    padding:50px 15px 15px 15px;
+}
+.btn-show, .btn-edit, .btn-delete, .btn-lookup {color:white; margin:3px;padding:3px}
+
+.btn-show{background:#64e6f6}
+.btn-edit{background:#48cbfd}
+.btn-lookup{background:#a4b5d3}
+.btn-delete{background:#88bdfe} 
+
+.border-p{
+    border-top:1px solid #6C7AE0 
+}

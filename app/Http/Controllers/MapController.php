@@ -162,7 +162,7 @@ class MapController extends Controller {
     public function getNearBy() {
 
         $mapId = basename(url()->previous());
-
+        
         $mapObject = Map::find($mapId);
         if ($mapObject instanceof Map) {
             $nearByObject = $mapObject->getNearByMiles();

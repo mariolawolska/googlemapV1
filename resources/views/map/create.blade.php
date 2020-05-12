@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4 text-right">Add address</h3>
-                            <div class="border-top my-3 mb-5"></div>
+                            <div class="border-p my-3 mb-5"></div>
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -96,9 +96,7 @@
                                         
                                     </div>
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
                 </div>
