@@ -38,7 +38,7 @@ class Map extends Model {
      * 
      * @return type
      */
-    public function getNearByMiles($distanceMiles = 5, $limit = 5) {
+    public function getNearByMiles($distanceMiles = 10, $limit = 3) {
 
         $map = DB::select('SELECT * FROM (
         SELECT *, 
@@ -56,7 +56,8 @@ class Map extends Model {
         )
         as distance FROM `map`
         ) map
-        WHERE distance <= ?
+        WHERE distance <= ? 
+        ORDER BY distance ASC
         LIMIT ?', [$this->lat, $this->lat, $this->lng, $distanceMiles, $limit]);
 
         return $map;
@@ -69,7 +70,7 @@ class Map extends Model {
       $LONGITUDE = the longitude of the start point e.g 286.95225338731285;
       $DISTANCE_KILOMETERS = your radius of search in Kilometers e.g 150
      */
-    public function getNearByKilometers($distanceKilometers = 5, $limit = 5) {
+    public function getNearByKilometers($distanceKilometers = 10, $limit = 3) {
 
         $map = DB::select('
             SELECT * FROM (
@@ -89,6 +90,7 @@ class Map extends Model {
                 as distance FROM `map`
             ) map
             WHERE distance <= ?
+            ORDER BY distance ASC
             LIMIT ?', [$this->lat, $this->lat, $this->lng, $distanceKilometers, $limit]);
 
         return $map;

@@ -94,7 +94,8 @@ class MapController extends Controller {
         ]);
 
         $map->update($request->all());
-
+        $this->getApiGeocode($map);
+        
         return redirect()->route('map.index')->with('success', 'Map updated successfully');
     }
 
@@ -129,6 +130,13 @@ class MapController extends Controller {
 
         $data_google_interactive_map_api_key = "AIzaSyC3xyj_YojzsVBUkx0oi9O3goERpd0Lc9E";
 
+        /**
+         * 1 Get googleapis by address
+         */
+        
+        /**
+         * 2 Get googleapis by postcode
+         */
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $postCode . '&key=' . $data_google_interactive_map_api_key;
         $geocode = file_get_contents($url);
         $output = json_decode($geocode);
@@ -140,6 +148,10 @@ class MapController extends Controller {
 
             $mapObject->save();
         }
+        
+        /**
+         * Check if location are within 2km
+         */
     }
 
     /**
@@ -162,45 +174,37 @@ class MapController extends Controller {
     public function getNearBy() {
 
         $mapId = basename(url()->previous());
-        
+        $distanceMiles = 5;
+        $limit = 3;
+
         $mapObject = Map::find($mapId);
         if ($mapObject instanceof Map) {
-            $nearByObject = $mapObject->getNearByMiles();
+            $nearByObject = $mapObject->getNearByMiles($distanceMiles, $limit);
         } else {
             $url = url()->previous();
             $mapId = explode('/', $url);
             $mapId = $mapId[5];
             $mapObject = Map::find($mapId);
-            $nearByObject = $mapObject->getNearByMiles();
+            $nearByObject = $mapObject->getNearByMiles($distanceMiles, $limit);
         }
-//        $gmap_co_ordinates = [];
-        $key = 1;
+
         foreach ($nearByObject as $object) {
 
-//            $marker_postcode = str_replace(" ", "%20", $current_postcode);
-            // $gmap_postcode_basic .= $marker_postcode . "%7C";
-            //            if (($lat * 1) != 0 && ($lng * 1) != 0) {
-//            $info_window_content = '<strong>' . $object->postCode . '</strong></br>';
-//            $info_window_content .= ' ' . $object->addressLine1 . ' ' . $object->addressLine2 . ' ' . $object->addressLine3 . '<br>';
-//            $info_window_content .= ' ' . $object->city . ', ' . $object->country . '<br>';
-//            $info_window_content .= '<a target="_blank" href="https://www.google.com/maps/search/?api=1&query=' . $object->lat . ',' . $object->lng . '&query_place_id=' . $object->googlePlaceId . '">Open map</a>';
-//
-//            $gmap_co_ordinates[] = array(
-//                'google_map' => array(
-//                    'lat' => $object->lat,
-//                    'lng' => $object->lng,
-//                ),
-//                'info_window_content' => $info_window_content,
-//                'alphabet' => 'C',
-//                'marker_color' => '#4CCC10',
-//                'google_place_id' => $object->googlePlaceId,
-//            );
-            $gmap[] = [$object->addressLine1 . ' ' . $object->addressLine2 . ' ' . $object->addressLine3, $object->lat, $object->lng, $key];
-//            }
+            if ($object->id == $mapObject->id) {
+                $gmap[0] = [$object->addressLine1 . ' ' . $object->addressLine2 . ' ' . $object->addressLine3, $object->lat, $object->lng, 1];
+            }
+        }
+
+        $key = 2;
+        foreach ($nearByObject as $object) {
+
+            if ($object->id != $mapObject->id) {
+                $gmap[] = [$object->addressLine1 . ' ' . $object->addressLine2 . ' ' . $object->addressLine3, $object->lat, $object->lng, $key];
+            }
+
             $key++;
         }
 
-//        return response()->json(json_encode($gmap_co_ordinates));
         $json = json_encode($gmap);
         return response()->json($json);
     }

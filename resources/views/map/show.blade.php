@@ -20,18 +20,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4 text-right">Show Answer</h3>
-                            <div class="border-top my-3 mb-5"></div>
+                            <h3 class="login-heading mb-4 text-right">Show Location</h3>
+                            <div class="border-p my-3 mb-5"></div>
 
 
                             <div class="row">
 
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>Id:</strong>
-                                        {{ $map->id }}
-                                    </div>
-                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Address Line 1:</strong>
@@ -119,6 +113,6 @@
         </div>
     </div>
 </div>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3xyj_YojzsVBUkx0oi9O3goERpd0Lc9E&callback=initMap"></script>
 <script src='{{ URL::asset('../public/js/map.js') }}?mapId={{ $map->id }}'></script>
 @endsection

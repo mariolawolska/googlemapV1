@@ -16,7 +16,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4 text-right">Edit address details</h3>
+                            <h3 class="login-heading mb-4 text-right">Edit Location</h3>
                             <div class="border-p my-3 mb-5"></div>
                             @if ($errors->any())
                             <div class="alert alert-danger">
@@ -109,5 +109,6 @@
         </div>
     </div>
 </div>
-<script src='{{ URL::asset('../resources/js/map.js') }}?mapId={{ $map->id }}'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3xyj_YojzsVBUkx0oi9O3goERpd0Lc9E&callback=initMap"></script>
+<script src='{{ URL::asset('../public/js/map.js') }}?mapId={{ $map->id }}'></script>
 @endsection

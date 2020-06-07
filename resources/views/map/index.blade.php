@@ -55,11 +55,7 @@
                                                 <th class="cell100 column4">County State</th>
                                                 <th class="cell100 column5">Country</th>
                                                 <th class="cell100 column6">Post Code</th>
-
-                                                <th class="cell100 column7">Lat</th>
-                                                <th class="cell100 column8">Lng</th>
-                                                <th class="cell100 column9">Google Place Id</th>
-
+                                                <th class="cell100 column7">Lat, Lng, Google Place Id </th>
                                                 <th class="cell100 column10">Created At</th>
                                                 <th class="cell100 column11">Action</th>
                                             </tr>
@@ -83,15 +79,9 @@
                                                 <td class="cell100 column5">{{ $map->country }}</td>
                                                 <td class="cell100 column6">{{ $map->postCode }}</td>
 
-                                                <td class="cell100 column7">{{ $map->lat }}</td>
-                                                <td class="cell100 column8">{{ $map->lng }}</td>
-                                                <td class="cell100 column9">
-                                                    <div class="forModall btn ">
-                                                        {{ $map->googlePlaceId }}
-                                                    </div>
-                                                </td>
+                                                <td class="cell100 column7">{{ $map->lat }},<br>{{ $map->lng }},<br>{{ $map->googlePlaceId }}</td>
 
-                                                <td class="cell100 column10">{{ $map->created_at }}</td>
+                                                <td class="cell100 column10">{{ $map->created_at->format('d/m/Y') }}</td>
                                                 <td class="cell100 column11">
                                                     <form class="pr-3" action="{{ route('map.destroy',$map->id) }}" method="POST">
 
@@ -126,6 +116,7 @@
     </div>
 </div>
 
+<script src="{{ URL::asset('../resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script>
     $('.js-pscroll').each(function () {
         var ps = new PerfectScrollbar(this);
@@ -134,9 +125,6 @@
             ps.update();
         });
     });
-
-
 </script>
-
 
 @endsection

@@ -38,26 +38,17 @@ function initMap() {
 
 }
 function initMapV2(beaches) {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        gestureHandling: 'cooperative',
-        center: {lat: parseFloat(beaches[0][1]), lng: parseFloat(beaches[0][2])}
-    });
 
-    var iconBase =
-            'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
 
-    var icons = {
-        parking: {
-            icon: iconBase + 'parking_lot_maps.png'
-        },
-        library: {
-            icon: iconBase + 'library_maps.png'
-        },
-        info: {
-            icon: iconBase + 'info-i_maps.png'
-        }
+
+    var mapOptions = {
+        center: new google.maps.LatLng(parseFloat(beaches[0][1]), parseFloat(beaches[0][2])),
+        gestureHandling: 'cooperative'
+
     };
+
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
 
     setMarkers(map, beaches);
 }
@@ -68,6 +59,9 @@ function initMapV2(beaches) {
 
 function setMarkers(map, beaches) {
 
+
+    var labels = '#12345';
+    var labelIndex = 0;
     // Adds markers to the map.
 
     // Marker sizes are expressed as a Size of X,Y where the origin of the image
@@ -84,22 +78,24 @@ function setMarkers(map, beaches) {
         // The anchor for this image is the base of the flagpole at (0, 32).
         anchor: new google.maps.Point(0, 32)
     };
-    // Shapes define the clickable region of the icon. The type defines an HTML
-    // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-    // The final coordinate closes the poly by connecting to the first coordinate.
-    var shape = {
-        coords: [1, 1, 1, 20, 18, 20, 18, 1],
-        type: 'poly'
-    };
+
+    var markerBounds = new google.maps.LatLngBounds();
+    
     for (var i = 0; i < beaches.length; i++) {
         var beach = beaches[i];
-        var marker = new google.maps.Marker({
-            position: {lat: parseFloat(beach[1]), lng: parseFloat(beach[2])},
-            map: map,
-            icon: image,
-            shape: shape,
-            title: beach[0],
-            zIndex: beach[3]
-        });
+
+        position = new google.maps.LatLng(parseFloat(beach[1]), parseFloat(beach[2])),
+                               
+                new google.maps.Marker({
+                    map: map,
+                    position: position,
+                    title: beach[0],
+                    zIndex: beach[3],
+                    label: labels[labelIndex++ % labels.length],
+                    animation: google.maps.Animation.Drop
+                });
+
+        markerBounds.extend(position);
     }
+    map.fitBounds(markerBounds);
 }
